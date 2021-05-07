@@ -17,6 +17,16 @@ app.post('/api/postMsg', (req, res) => {
     res.json({'data':'Message from API'})
 })
   
+
+// create test user in db on startup if required
+const createTestUser = require('./mongoDB/create-user');
+createTestUser();
+
+//api routes
+app.use('/users', require('./mongoDB/check-user'));
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+
+
